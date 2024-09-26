@@ -26,8 +26,6 @@ $ transl8 ja -p "Hello."
 
 ```sh
 $ transl8 ja README.md
----
-
 # transl8、単純なCLI翻訳ツール
 ...
 ```

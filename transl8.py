@@ -4,9 +4,9 @@ import sys
 import ollama
 
 LLM_MODEL = "qwen2.5:latest"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
-def translate(language_code: str, text: str):
+def translate(language_code: str, text: str) -> str:
     try:
         response = ollama.chat(
             model=LLM_MODEL,
@@ -49,15 +49,27 @@ def main():
         else:
             with open(args.text, 'r', encoding='utf-8') as file:
                 text_content = file.read()
+    text_content = text_content.strip()
 
     if args.alternative:
         translations = []
-        for i in range(5):
+        for i in range(3):
             translation = translate(args.language_code, text_content)
+
+            translation = translation.strip()
+            while translation.startswith("---\n"):
+                translation = translation[4:].strip()
+            while translation.endswith("\n---"):
+                translation = translation[:-4].strip()
+
             if translation in translations:
                 continue
-            print(f"* {translation}")
             translations.append(translation)
+
+            if text_content.find("\n") >= 0:
+                print(f"{translation}\n---")
+            else:
+                print(f"* {translation}")
     else:
         translation = translate(args.language_code, text_content)
         print(translation)
