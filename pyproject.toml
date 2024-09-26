@@ -1,0 +1,20 @@
+[project]
+name = "transl8"
+version = "0.1.0"
+authors = [
+    {name = "Toshihiro Kamiya", email = "kamiya@mbj.nifty.com"}
+]
+description = "a simple CLI translator that uses LLM running on local PC."
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+requires-python = ">=3.12"
+dependencies = [
+    "ollama",
+]
+
+[project.scripts]
+transl8 = "transl8:main"
+
+[project.urls]
+repository = "https://github.com/tos-kamiya/transl8"
+
