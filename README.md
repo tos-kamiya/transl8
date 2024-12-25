@@ -30,3 +30,6 @@ $ transl8 ja README.md
 ...
 ```
 
+## Changelog
+
+* v0.2.0: Fix miscellaneous bugs

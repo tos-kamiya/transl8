@@ -3,8 +3,9 @@ import sys
 
 import ollama
 
-LLM_MODEL = "qwen2.5:latest"
-VERSION = "0.1.1"
+LLM_MODEL = "qwen2.5:7b"
+VERSION = "0.2.0"
+
 
 def translate(language_code: str, text: str) -> str:
     try:
@@ -24,22 +25,22 @@ def translate(language_code: str, text: str) -> str:
 
 
 def main():
-    for m in ollama.list()["models"]:
-        model_name = m["name"]
-        if model_name == LLM_MODEL:
-            break
-    else:
-        print(f"Info: Model '{LLM_MODEL}' not found, try to install it...", file=sys.stderr)
-        ollama.pull(LLM_MODEL)
-
     parser = argparse.ArgumentParser(description="Translate text to a specified language.")
     parser.add_argument("language_code", help="The target language code (e.g., 'en' for English, 'ja' for Japanese).")
-    parser.add_argument("text", help="The text or path to the text file to be translated. Use '-' to read from stdin.")
+    parser.add_argument("text", help="Path of the text file to be translated. Use '-' to read from stdin.")
     parser.add_argument("-p", "--plain", action="store_true", help="Treat the input as plain text instead of a file path.")
     parser.add_argument("-a", "--alternative", action="store_true", help="Provide multiple translation variations.")
     parser.add_argument("--version", action="version", version=VERSION, help="Show the version number and exit.")
 
     args = parser.parse_args()
+
+    for m in ollama.list()["models"]:
+        model_name = m["model"]
+        if model_name == LLM_MODEL:
+            break
+    else:
+        print(f"Info: Model '{LLM_MODEL}' not found, try to install it...", file=sys.stderr)
+        ollama.pull(LLM_MODEL)
 
     if args.plain:
         text_content = args.text
@@ -73,3 +74,7 @@ def main():
     else:
         translation = translate(args.language_code, text_content)
         print(translation)
+
+
+if __name__ == '__main__':
+    main()
