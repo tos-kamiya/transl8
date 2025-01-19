@@ -6,18 +6,19 @@ import ollama
 LLM_MODEL = "qwen2.5:7b"
 VERSION = "0.3.0"
 
-TRANSLATION_TEMPLATE = "Translate the text below into '{%s}'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n{%s}",
-TRANSLATION_WITH_ANSI_TEMPLATE = "Translate the text below into '{%s}'. Output only the translation without any preamble or additional information.\n---\n{%s}",
+TRANSLATION_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n%s"
+TRANSLATION_WITH_ANSI_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information.\n---\n%s"
 
 
 def translate(language_code: str, text: str, keep_ansi: bool = False) -> str:
     try:
+        template = TRANSLATION_WITH_ANSI_TEMPLATE if keep_ansi else TRANSLATION_TEMPLATE
         response = ollama.chat(
             model=LLM_MODEL,
             messages=[
                 {
                     "role": "user", 
-                    "content": f"Translate the text below into '{language_code}'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n{text}",
+                    "content": template % (language_code, text)
                 },
             ],
         )
