@@ -32,4 +32,5 @@ $ transl8 ja README.md
 
 ## Changelog
 
+* v0.3.0: Keep ANSI escape sequences in text
 * v0.2.0: Fix miscellaneous bugs

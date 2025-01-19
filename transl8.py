@@ -4,17 +4,20 @@ import sys
 import ollama
 
 LLM_MODEL = "qwen2.5:7b"
-VERSION = "0.2.0"
+VERSION = "0.3.0"
+
+TRANSLATION_TEMPLATE = "Translate the text below into '{%s}'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n{%s}",
+TRANSLATION_WITH_ANSI_TEMPLATE = "Translate the text below into '{%s}'. Output only the translation without any preamble or additional information.\n---\n{%s}",
 
 
-def translate(language_code: str, text: str) -> str:
+def translate(language_code: str, text: str, keep_ansi: bool = False) -> str:
     try:
         response = ollama.chat(
             model=LLM_MODEL,
             messages=[
                 {
                     "role": "user", 
-                    "content": f"Translate the text below into '{language_code}'. Output only the translation without any preamble or additional information.\n---\n{text}",
+                    "content": f"Translate the text below into '{language_code}'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n{text}",
                 },
             ],
         )
@@ -52,10 +55,11 @@ def main():
                 text_content = file.read()
     text_content = text_content.strip()
 
+    ansi_included = text_content.find("\033[") >= 0
     if args.alternative:
         translations = []
         for i in range(3):
-            translation = translate(args.language_code, text_content)
+            translation = translate(args.language_code, text_content, keep_ansi=ansi_included)
 
             translation = translation.strip()
             while translation.startswith("---\n"):
