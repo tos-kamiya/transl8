@@ -32,5 +32,8 @@ $ transl8 ja README.md
 
 ## Changelog
 
+* v0.4.0
+  - Show message after Ctrl+D when reading from standard input
+  - Change the default model to Phi-4
 * v0.3.0: Keep ANSI escape sequences in text
 * v0.2.0: Fix miscellaneous bugs
