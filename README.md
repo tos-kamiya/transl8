@@ -32,6 +32,9 @@ $ transl8 ja README.md
 
 ## Changelog
 
+* v0.5.0
+  - Change the default model to Mistral Small 3 (max context size 32k)
+  - Add option --num-ctx to specify context size
 * v0.4.0
   - Show message after Ctrl+D when reading from standard input
   - Change the default model to Phi-4
