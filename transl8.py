@@ -7,8 +7,8 @@ import ollama
 DEFAULT_LLM_MODEL = "mistral-small:latest"
 VERSION = "0.5.0"
 
-TRANSLATION_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n%s"
-TRANSLATION_WITH_ANSI_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information.\n---\n%s"
+TRANSLATION_WITH_ANSI_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information. Keep ANSI escape sequences in text.\n---\n%s"
+TRANSLATION_TEMPLATE = "Translate the text below into '%s'. Output only the translation without any preamble or additional information.\n---\n%s"
 
 
 def translate(

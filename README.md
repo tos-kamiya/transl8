@@ -32,6 +32,8 @@ $ transl8 ja README.md
 
 ## Changelog
 
+* v0.5.2
+  - Fix prevent removal of ANSI escape sequences
 * v0.5.1
   - Add check to ensure model is installed
 * v0.5.0
