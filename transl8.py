@@ -74,6 +74,13 @@ def main():
 
     args = parser.parse_args()
 
+    try:
+        ollama.show(args.model)
+    except ollama.ResponseError as e:
+        print(f"Error: The model '{args.model}' is not installed yet.", file=sys.stderr)
+        print(f"Please ensure that the model is correctly downloaded using the following command:\n  ollama pull {args.model}", flush=True, file=sys.stderr)
+        exit(1)
+
     if args.num_ctx is not None:
         if args.num_ctx <= 0:
             print("Error: --num-ctx value should be > 0.", flush=True, file=sys.stderr)

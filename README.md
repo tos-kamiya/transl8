@@ -9,7 +9,7 @@ To install `transl8`, you need the following tools:
 * **pipx**: https://pipx.pypa.io/
 * **ollama**: https://ollama.com/
 
-After installing them, you can install `transl8` by pipx:
+Once you have installed these tools, you can install `transl8` using pipx:
 
 ```sh
 pipx install git+https://github.com/tos-kamiya/transl8
@@ -32,6 +32,8 @@ $ transl8 ja README.md
 
 ## Changelog
 
+* v0.5.1
+  - Add check to ensure model is installed
 * v0.5.0
   - Change the default model to Mistral Small 3 (max context size 32k)
   - Add option --num-ctx to specify context size
